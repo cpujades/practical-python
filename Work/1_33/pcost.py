@@ -12,8 +12,7 @@ def portfolio_cost(filename):
         with open(filename, "rt") as f:
             rows = csv.reader(f)
             headers = next(rows)
-            for line in f:
-                row = line.split(",")
+            for row in rows:
                 shares = int(row[1])
                 price = float(row[2])
                 tot_price += shares * price
