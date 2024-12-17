@@ -13,6 +13,8 @@ def read_portfolio(filename):
         headers = next(rows)
         for row in rows:
             holding = dict(zip(headers, row))
+            holding["shares"] = int(holding["shares"])
+            holding["price"] = float(holding["price"])
             portfolio.append(holding)
 
     return portfolio
@@ -34,8 +36,8 @@ def make_report(portfolio, prices):
     report = []
     for holding in portfolio:
         name = holding["name"]
-        shares = int(holding["shares"])
-        price = float(holding["price"])
+        shares = holding["shares"]
+        price = holding["price"]
         current_price = prices[name]
         change = current_price - price
         report.append((name, shares, current_price, change))
