@@ -6,7 +6,7 @@ import csv
 import sys
 import os
 from stock import Stock
-from tableformat import TableFormatter
+from tableformat import create_formatter
 
 # Now you can import the parse_csv function from fileparse
 from fileparse import parse_csv
@@ -66,7 +66,7 @@ def portfolio_report(portfolio_filename, prices_filename, fmt="txt"):
     portfolio = read_portfolio(portfolio_filename)
     prices = read_prices(prices_filename)
     report = make_report(portfolio, prices)
-    formatter = TableFormatter.create_formatter(fmt)
+    formatter = create_formatter(fmt)
     print_report(report, formatter)
 
 

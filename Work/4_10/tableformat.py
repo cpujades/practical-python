@@ -14,22 +14,6 @@ class TableFormatter:
         """
         raise NotImplementedError()
 
-    def create_formatter(fmt):
-        if fmt == "txt":
-            return TextTableFormatter()
-        elif fmt == "csv":
-            return CSVTableFormatter()
-        elif fmt == "html":
-            return HTMLTableFormatter()
-        else:
-            raise RuntimeError(f"Unknown format {fmt}")
-
-    def print_table(objects, attributes, formatter):
-        formatter.headings(attributes)
-        for obj in objects:
-            rowdata = [str(getattr(obj, attr)) for attr in attributes]
-            formatter.row(rowdata)
-
 
 class TextTableFormatter(TableFormatter):
     """
@@ -77,3 +61,21 @@ class HTMLTableFormatter(TableFormatter):
         for d in rowdata:
             print(f"<td>{d}</td>", end="")
         print("</tr>")
+
+
+def create_formatter(fmt):
+    if fmt == "txt":
+        return TextTableFormatter()
+    elif fmt == "csv":
+        return CSVTableFormatter()
+    elif fmt == "html":
+        return HTMLTableFormatter()
+    else:
+        raise RuntimeError(f"Unknown format {fmt}")
+
+
+def print_table(objects, attributes, formatter):
+    formatter.headings(attributes)
+    for obj in objects:
+        rowdata = [str(getattr(obj, attr)) for attr in attributes]
+        formatter.row(rowdata)
