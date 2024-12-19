@@ -24,6 +24,12 @@ class TableFormatter:
         else:
             raise RuntimeError(f"Unknown format {fmt}")
 
+    def print_table(objects, attributes, formatter):
+        formatter.headings(attributes)
+        for obj in objects:
+            rowdata = [str(getattr(obj, attr)) for attr in attributes]
+            formatter.row(rowdata)
+
 
 class TextTableFormatter(TableFormatter):
     """
